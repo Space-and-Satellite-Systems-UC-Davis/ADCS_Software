@@ -1,6 +1,6 @@
 /**@file ADCS.c
  *
- * @brief Implementation of Intellisat interface to the ADCS software.
+ * @brief Implementation of Intellisat's interface to the ADCS software.
  *
  * @author Jacob Tkeio (jacobtkeio@gmail.com)
  * @date 8/5/2023

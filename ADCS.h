@@ -1,6 +1,6 @@
 /**@file ADCS.h
  *
- * @brief Intellisat interface to ADCS software.
+ * @brief Intellisat's interface to the ADCS software.
  *
  * @author Jacob Tkeio (jacobtkeio@gmail.com)
  *
@@ -11,13 +11,7 @@
 #define ADCS_H
 
 #include "adcs_math/matrix.h"
-
-
-//Intellisat functions required in ADCS_MAIN
-//e.g. getting raw sun sensor data,
-//     getting IMU data,
-//     sending a command to the MRW/HDD,
-//     sending a coils command, etc.
+#include "virtual_intellisat.h"
 
 
 //State variables
