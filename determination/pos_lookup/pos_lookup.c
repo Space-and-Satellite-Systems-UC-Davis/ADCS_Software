@@ -21,7 +21,7 @@ int pos_lookup(
 	double *latitude,
 	double *altitude,
     double *geocentric_radius,
-    double geocentric_latitude
+    double *geocentric_latitude
 ) {
 	TLE tle; //TODO: store TLE struct more efficiently
 
@@ -77,7 +77,7 @@ int pos_lookup(
 
     if (status_cel2ter != 0) return status_cel2ter;
 
-    (*geocentric_latitude) = asin(z / geocentric_radius);
+    (*geocentric_latitude) = asin(realop_position_ITRS[2] / (*geocentric_radius)); //TODO: verify
 
 
 //Convert ITRS vector (meters) to geodetic coordinates (lon,lat,alt).

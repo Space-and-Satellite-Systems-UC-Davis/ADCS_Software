@@ -5,8 +5,6 @@
 float g[IGRF_GEN][IGRF_GEN + 1];
 float h[IGRF_GEN][IGRF_GEN + 1];
 
-volatile float B_ned[3] = {0.0, 0.0, 0.0}; // {N,E,U}
-volatile float B_sph[3] = {0.0, 0.0, 0.0}; // {Radial, Theta, Phi}
 float decimal_years = 0;                   // Decimal days since January 1, IGRF_START_YEAR
 
 // Schmidt quasi-normalized coefficients
@@ -83,9 +81,9 @@ void compute_gauss_coeffs(float decimal_years_) {
     */
 
     uint8_t k = 0;
-    for (size_t i = 1; i <= IGRF_GEN; i++)
+    for (int i = 1; i <= IGRF_GEN; i++)
     {
-        for (size_t j = 0; j <= i; j++)
+        for (int j = 0; j <= i; j++)
         {
             //  std::cout << i << j << std::endl;
             g[i - 1][j] = g_val[k] + g_svi[k] * decimal_years_;
@@ -199,7 +197,7 @@ void igrf_update(float latitude, float longitude, float radius, int interpolate_
         }
     }
 
-    B_sph[0] = B_radial;
+    B_sph[0] =  B_radial;
     B_sph[1] = -B_theta;
     B_sph[2] = -B_phi / sin(theta);
 

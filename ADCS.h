@@ -16,8 +16,6 @@
 
 //State variables
 mat3 realop_attitude;
-double UTC1;
-double UTC2;
 
 
 typedef enum {
