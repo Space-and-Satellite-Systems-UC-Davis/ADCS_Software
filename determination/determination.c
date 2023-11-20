@@ -9,11 +9,13 @@
 
 #include "adcs_math/vector.h"
 #include "adcs_math/matrix.h"
+
 #include "virtual_intellisat.h"
 #include "ADCS.h"
 
 
-int determination(
+determination_status
+determination(
     int year,
     int month,
     int day,
@@ -31,10 +33,17 @@ int determination(
     char tle_line1[70]; //TODO: make these persistent so that we don't
     char tle_line2[70]; //have to ask Intellisat for them every time.
 
-    int tle_status = get_tle(
+    get_tle_status tle_status =
+    get_tle(
         tle_line1,
         tle_line2
     );
+
+    switch (tle_status) {
+        default:            return DET_UNHANDLED_ERROR;
+        case NO_TLE:        return DET_NO_TLE;
+        case TLE_SUCCESS:   break;
+    }
 
 
     double longitude;
@@ -43,7 +52,8 @@ int determination(
     double geocentric_radius;
     double geocentric_latitude;
 
-    int pos_lookup_status = pos_lookup(
+    pos_lookup_status pos_status =
+    pos_lookup(
     	tle_line1,
     	tle_line2,
     	UTC,
@@ -55,10 +65,19 @@ int determination(
         &geocentric_latitude
     );
 
+    switch (pos_status) {
+        default:                    return DET_UNHANDLED_ERROR;
+        case SGP4_ERROR:            return DET_POS_LOOKUP_ERROR;
+        case TEME2ITRS_ERROR:       return DET_POS_LOOKUP_ERROR;
+        case ITRS2LLA_ERROR:        return DET_POS_LOOKUP_ERROR;
+        case POS_LOOKUP_SUCCESS:    break;
+    }
+
 
 	vec3 reference_sun;
 
-    int sun_lookup_status = sun_lookup(
+    sun_lookup_status sun_status =
+    sun_lookup(
     	longitude,
     	latitude,
     	altitude,
@@ -71,10 +90,19 @@ int determination(
 	    &reference_sun
     );
 
+    switch (sun_status) {
+        default:                        return DET_UNHANDLED_ERROR;
+        case SUN_LOOKUP_BAD_DATE:       return DET_POS_LOOKUP_ERROR;
+        case SUN_LOOKUP_BAD_EVIRONMENT: return DET_POS_LOOKUP_ERROR;
+        case SUN_LOOKUP_BAD_LLA:        return DET_POS_LOOKUP_ERROR;
+        case SUN_LOOKUP_SUCCESS:        break;
+    }
+
 
     vec3 reference_mag;
 
-    int igrf_time_status = igrf_set_date_time(
+    int igrf_time_status =
+    igrf_set_date_time(
         year,
         month,
         day,
@@ -82,6 +110,12 @@ int determination(
         minute,
         second
     ); //recalculate every time for now...
+
+    switch (igrf_time_status) {
+        default:    return DET_UNHANDLED_ERROR;
+        case 0:     return DET_IGRF_TIME_ERROR;
+        case 1:     break;
+    }
 
     igrf_update(
         geocentric_latitude, //TODO: verify this is geocentric
@@ -97,6 +131,7 @@ int determination(
         &reference_mag
     );
 
+    triad_run_status triad_status = 
     triad(
     	measured_sun,
         measured_mag,
@@ -104,8 +139,17 @@ int determination(
         reference_mag,
     	&realop_attitude //In ADCS.h
     );
+
+    switch (triad_status) {
+        default:                    return DET_UNHANDLED_ERROR;
+        case TRIAD_NORM_FAILURE:    return DET_TRIAD_ERROR;
+        case TRIAD_SUCCESS:         break;
+    }
+
+    return DET_SUCCESS;
 }
 
 
-//TODO: handle errors
+
+
 

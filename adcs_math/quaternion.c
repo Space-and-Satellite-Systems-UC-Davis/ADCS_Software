@@ -60,12 +60,19 @@ void quat_mult(quat left, quat right, quat *output) {
 }
 
 
-void quat_norm(quat quaternion, quat *output) {
+int quat_norm(quat quaternion, quat *output) {
+    double mag = quat_mag(quaternion);
+    
+    if (fabs(mag) < 1e-6)
+        return -1;
+
 	quat_scalar(
-		1 / quat_mag(quaternion),
+		1 / mag
 		quaternion,
 		output	
 	);
+
+    return 0;
 }
 
 

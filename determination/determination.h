@@ -1,7 +1,17 @@
 #include "adcs_math/vector.h"
 
 
-int determination(
+typedef enum {
+    DET_SUCCESS,
+    DET_NO_TLE,
+    DET_POS_LOOKUP_ERROR,
+    DET_IGRF_TIME_ERROR,
+    DET_TRIAD_ERROR,
+    DET_UNHANDLED_ERROR
+} determination_status;
+
+determination_status
+determination(
     int year,
     int month,
     int day,

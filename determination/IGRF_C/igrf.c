@@ -249,7 +249,7 @@ uint8_t igrf_set_date_time(uint16_t year, uint8_t month, uint8_t day,
     if ((year < IGRF_START_YEAR) && (year > IGRF_END_YEAR) &&
         (month > 12) && (day > 31) && (hour > 23) && (min > 60) && (sec > 60))
     {
-        return 0;
+        return 0; //TODO: verify...
     }
 
     // Count complete years

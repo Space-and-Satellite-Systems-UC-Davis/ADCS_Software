@@ -21,6 +21,12 @@
 #define VIRTUAL_INTELLISAT_H
 
 
+typedef enum {
+    TLE_SUCCESS,
+    NO_TLE,
+} get_tle_status;
+
+
 /**@brief Load most recent TLE strings.
  *
  * @param tle_line1 The first  line of the TLE (70 chars).
@@ -30,9 +36,10 @@
  *  and tle_line2[j].
  * It may be easier to modify a char**; just say the word!
  *
- * @return Status; zero means success.
+ * @return get_tle_status SUCCESS_TLE or NO_TLE.
  */
-int get_tle(
+get_tle_status
+get_tle(
     char *tle_line1,
     char *tle_line2
 );

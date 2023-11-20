@@ -10,6 +10,13 @@
 #define POS_LOOKUP_H
 
 
+typedef enum {
+    POS_LOOKUP_SUCCESS,
+    SGP4_ERROR,
+    TEME2ITRS_ERROR,
+    ITRS2LLA_ERROR
+} pos_lookup_status;
+
 /**@brief Calculate geodetic position given TLE and time.
  *
  * @param tle_line1,tle_line2 Both lines of the TLE as C strings.
@@ -23,9 +30,10 @@
  * Geocentric radius is in kilometers.
  * Geocentric latitude is in radians.
  *
- * @return Error code: zero means success, anything else failure.
+ * @return pos_lookup_status Error code.
  */
-int pos_lookup (
+pos_lookup_status
+pos_lookup (
 	char *tle_line1,
 	char *tle_line2,
 	double UTC1,
