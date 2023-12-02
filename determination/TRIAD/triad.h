@@ -32,6 +32,11 @@
 #include "adcs_math/matrix.h"
 
 
+typedef enum {
+    TRIAD_SUCCESS,
+    TRIAD_NORM_FAILURE
+} triad_run_status;
+
 /**@brief Calculate the satellite's attitude given the reference
  *  and sensor sun and mag vectors.
  *
@@ -44,11 +49,14 @@
  * @param output The mat3* that will hold the satellite's attitude
  *  as a direction cosine matrix.
  *
- * @return Void.
+ * @return traid_run_status Error code.
  */
-void triad(
-	vec3 bod_sun, vec3 bod_mag,
-	vec3 ref_sun, vec3 ref_mag,
+traid_run_status
+triad(
+	vec3 bod_sun,
+    vec3 bod_mag,
+	vec3 ref_sun,
+    vec3 ref_mag,
 	mat3 *output
 );
 

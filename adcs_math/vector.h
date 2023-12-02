@@ -85,9 +85,10 @@ void vec_bisect(vec3 first, vec3 second, vec3 *output);
  * @param vector The vector to normalize.
  * @param output The vec3* that will hold the normalized vector.
  *
- * @return Void.
+ * @return Error code: -1 if mag(vector) == 0
+ *                      0 if success.
  */
-void vec_norm(vec3 vector, vec3 *output);
+int vec_norm(vec3 vector, vec3 *output);
 
 
 /**@brief Calculate the dot product of two vectors.

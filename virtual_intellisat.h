@@ -20,8 +20,29 @@
 #ifndef VIRTUAL_INTELLISAT_H
 #define VIRTUAL_INTELLISAT_H
 
-//Add 'em as you need 'em!
 
+typedef enum {
+    TLE_SUCCESS,
+    NO_TLE,
+} get_tle_status;
+
+
+/**@brief Load most recent TLE strings.
+ *
+ * @param tle_line1 The first  line of the TLE (70 chars).
+ * @param tle_line2 The second line of the TLE (70 chars).
+ *
+ * These should be directly modifiable as tle_line1[i] 
+ *  and tle_line2[j].
+ * It may be easier to modify a char**; just say the word!
+ *
+ * @return get_tle_status SUCCESS_TLE or NO_TLE.
+ */
+get_tle_status
+get_tle(
+    char *tle_line1,
+    char *tle_line2
+);
 
 
 

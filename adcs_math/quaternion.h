@@ -65,9 +65,10 @@ void quat_mult(quat left, quat right, quat *output);
  * @param quaternion The quaternion to normalize.
  * @param output The quat* that will hold the normalized quaternion.
  *
- * @return Void.
+ * @return Error: -1 if mag(quaternion) == 0
+ *                 0 if success
  */
-void quat_norm(quat quaternion, quat *output);
+int quat_norm(quat quaternion, quat *output);
 
 
 /**@brief Find the conjugate of a quaternion.

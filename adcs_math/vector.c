@@ -58,12 +58,19 @@ void vec_bisect(vec3 left, vec3 right, vec3 *output) {
 	);
 }
 
-void vec_norm(vec3 vector, vec3 *output) {
+int vec_norm(vec3 vector, vec3 *output) {
+    double mag = vec_mag(vector);
+
+    if (fabs(mag) < 1e-6) 
+        return -1;
+
 	vec_scalar(
-		1 / vec_mag(vector),
+		1 / mag,
 		vector,
 		output
 	);
+
+    return 0;
 }
 
 double vec_dot(vec3 first, vec3 second) {
@@ -74,7 +81,7 @@ double vec_dot(vec3 first, vec3 second) {
 }
 
 double vec_mag(vec3 vector) {
-	return sqrt(vec_dot(vector, vector));
+	return sqrt(fabs(vec_dot(vector, vector)));
 }
 
 

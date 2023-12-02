@@ -12,7 +12,8 @@
 #include "determination/novasc3.1/novas.h"
 
 
-int pos_lookup(
+pos_lookup_success
+pos_lookup(
 	char *tle_line1,
 	char *tle_line2,
 	double UTC1,
@@ -21,7 +22,7 @@ int pos_lookup(
 	double *latitude,
 	double *altitude,
     double *geocentric_radius,
-    double geocentric_latitude
+    double *geocentric_latitude
 ) {
 	TLE tle; //TODO: store TLE struct more efficiently
 
@@ -40,7 +41,8 @@ int pos_lookup(
 		realop_velocity_TEME
 	);
 
-    if (tle.sgp4Error != 0) return tle.sgp4Error;
+    if (tle.sgp4Error != 0)
+        return SGP4_ERROR;
 
 
 //Convert from kilometers to meters.
@@ -61,28 +63,30 @@ int pos_lookup(
 
 	double MJD = (UTC1+UTC2) - 2400000.5; //for x_p,y_p approximation
 
-	short int status_cel2ter = cel2ter (
+	short int status_cel2ter =
+    cel2ter(
 		UTC1,
 		UTC2,
 		70, //TODO: update, probably pass as argument from ADCS main
 		1,  //Equinox-based so we can ask for equinox of date
 		1,  //Reduced accuracy
 		1,  //Asking for equinox of date (TEME instead of GCRS)
-		
 		0.000005*MJD - 0.1183, //x_p (see footnote)
 		0.00001 *MJD - 0.0177, //y_p (    ....    )
 		realop_position_TEME,  //Transform from TEME
 		realop_position_ITRS   //to ITRS
 	);
 
-    if (status_cel2ter != 0) return status_cel2ter;
+    if (status_cel2ter != 0)
+        return TEME2ITRS_ERROR;
 
-    (*geocentric_latitude) = asin(z / geocentric_radius);
+    (*geocentric_latitude) = asin(realop_position_ITRS[2] / (*geocentric_radius)); //TODO: verify
 
 
 //Convert ITRS vector (meters) to geodetic coordinates (lon,lat,alt).
 
-    int status_etg = wgs84EcefToGeo(
+    int status_etg =
+    wgs84EcefToGeo(
         realop_position_ITRS[0],
         realop_position_ITRS[1],
         realop_position_ITRS[2],
@@ -91,10 +95,11 @@ int pos_lookup(
         altitude
     );
 
-    if (status_etg != 0) return status_etg;
+    if (status_etg != 0)
+        return ITRS2LLA_ERROR;
 
 
-	return 0;
+	return POS_LOOKUP_SUCCESS;
 }
 
 
