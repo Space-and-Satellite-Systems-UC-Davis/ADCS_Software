@@ -197,10 +197,10 @@ void igrf_update(float latitude, float longitude, float radius, int interpolate_
         }
     }
 
+
     B_sph[0] =  B_radial;
     B_sph[1] = -B_theta;
     B_sph[2] = -B_phi / sin(theta);
-
     B_ned[0] = -B_sph[1];
     B_ned[1] = -B_sph[2];
     B_ned[2] = -B_sph[0];
