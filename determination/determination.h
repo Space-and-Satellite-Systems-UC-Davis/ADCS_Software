@@ -3,6 +3,9 @@
 
 #include "adcs_math/vector.h"
 
+#ifndef DETERMINATION_H
+#define DETERMINATION_H
+
 
 typedef enum {
     DET_SUCCESS,
@@ -28,7 +31,3 @@ determination(
 
 
 #endif//DETERMINATION_H
-
-
-
-
