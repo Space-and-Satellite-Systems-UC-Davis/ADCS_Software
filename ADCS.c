@@ -9,15 +9,8 @@
 #include "ADCS.h"
 
 
-void ADCS_MAIN(
-	adcs_mode mode,
-	int year,
-	int month,
-	int day,
-	int hour,
-	int min,
-	double sec
-) {
+adcs_main_status
+ADCS_MAIN(adcs_mode mode) {
 
 }
 
