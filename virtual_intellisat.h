@@ -41,6 +41,28 @@ vi_get_epoch(
     int *second
 );
 
+/**@brief Report the current date and time to second accuracy.
+ *
+ * @param year,month,day,hour,minute,second Return-by-reference ptrs.
+ *
+ * @return get_epoch_status A return code.
+ */
+get_epoch_status
+get_epoch(
+    int *year,
+    int *month,
+    int *day,
+    int *hour,
+    int *minute,
+    int *second
+);
+
+
+
+typedef enum {
+    GET_CURR_MILLIS_SUCCESS,
+    GET_CURR_MILLIS_FAILURE
+} get_curr_millis_status;
 
 /**@brief Report the current date and time to second accuracy.
  *
