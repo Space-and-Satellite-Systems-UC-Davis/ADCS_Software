@@ -1,4 +1,4 @@
-/**@file virtual_intellisat.h
+/*@file virtual_intellisat.h
  *
  * @brief ADCS Software's interface to Intellisat.
  *
@@ -24,16 +24,16 @@
 typedef enum {
     GET_EPOCH_SUCCESS,
     GET_EPOCH_FAILURE
-} get_epoch_status;
+} vi_get_epoch_status;
 
 /**@brief Report the current date and time to second accuracy.
  *
  * @param year,month,day,hour,minute,second Return-by-reference ptrs.
  *
- * @return get_epoch_status A return code.
+ * @return vi_get_epoch_status A return code.
  */
-get_epoch_status
-get_epoch(
+vi_get_epoch_status
+vi_get_epoch(
     int *year,
     int *month,
     int *day,
@@ -47,7 +47,7 @@ get_epoch(
 typedef enum {
     GET_CURR_MILLIS_SUCCESS,
     GET_CURR_MILLIS_FAILURE
-} get_curr_millis_status;
+} vi_get_curr_millis_status;
 
 /**@brief Report the value of Intellisat's millisecond counter.
  *
@@ -55,10 +55,10 @@ typedef enum {
  *
  * @param curr_millis Return-by-reference pointer.
  *
- * @return get_curr_millis_status A return code.
+ * @return vi_get_curr_millis_status A return code.
  */
-get_curr_millis_status
-get_curr_millis(
+vi_get_curr_millis_status
+vi_get_curr_millis(
     int *curr_millis
 );
 
@@ -67,7 +67,7 @@ get_curr_millis(
 typedef enum {
     GET_ANGVEL_SUCCESS,
     GET_ANGVEL_FAILURE
-} get_angvel_status;
+} vi_get_angvel_status;
 
 /**@brief Retrieve angular velocity data from the IMU.
  *
@@ -76,10 +76,10 @@ typedef enum {
  * The sign of the angular velocity values must adhere to the
  *   Right-Hand-Rule as defined by the satellite's positive axes.
  *
- * @return get_angvel_status A return code.
+ * @return vi_get_angvel_status A return code.
  */
-get_angvel_status
-get_angvel(
+vi_get_angvel_status
+vi_get_angvel(
     double *angvel_x, 
     double *angvel_y,
     double *angvel_z
@@ -90,7 +90,7 @@ get_angvel(
 typedef enum {
     HDD_COMMAND_SUCCESS,
     HDD_COMMAND_FAILURE
-} hdd_command_status;
+} vi_hdd_command_status;
 
 /**@brief Send a throttle command to the HDD.
  *
@@ -102,10 +102,10 @@ typedef enum {
  *   acceleration as defined by the satellite's positive Z axis
  *   and the Right-Hand-Rule.
  *
- * @return hdd_command_status A return code.
+ * @return vi_hdd_command_status A return code.
  */
-hdd_command_status
-hdd_command(
+vi_hdd_command_status
+vi_hdd_command(
     double throttle
 );
 
