@@ -9,6 +9,7 @@
  * @date 7/17/2023
  */
 
+#include "determination/TRIAD/triad.h"
 #include "adcs_math/vector.h"
 #include "adcs_math/matrix.h"
 
@@ -22,18 +23,21 @@ triad(
 	mat3 *output
 ) {
 	vec3 bod_basis1 = bod_mag;
-    if (vec_norm(bod_basis1, &bod_basis1) < 0)
+    if (vec_norm(bod_basis1, &bod_basis1) < 0) {
         return TRIAD_NORM_FAILURE;
+    }
 
 	vec3 bod_basis2;
 	vec_cross(bod_mag, bod_sun, &bod_basis2);
-	if (vec_norm(bod_basis2, &bod_basis2) < 0)
+	if (vec_norm(bod_basis2, &bod_basis2) < 0) {
         return TRIAD_NORM_FAILURE;
+    }
 
 	vec3 bod_basis3;
 	vec_cross(bod_basis1, bod_basis2, &bod_basis3);
-	if (vec_norm(bod_basis3, &bod_basis3) < 0)
+	if (vec_norm(bod_basis3, &bod_basis3) < 0) {
         return TRIAD_NORM_FAILURE;
+    }
 
 	mat3 bod_triad;
 	mat_set_from_vec(
@@ -45,18 +49,21 @@ triad(
 
 
 	vec3 ref_basis1 = ref_mag;
-	if (vec_norm(ref_basis1, &ref_basis1) < 0)
+	if (vec_norm(ref_basis1, &ref_basis1) < 0) {
         return TRIAD_NORM_FAILURE;
+    }
 
 	vec3 ref_basis2;
 	vec_cross(ref_mag, ref_sun, &ref_basis2);
-	if (vec_norm(ref_basis2, &ref_basis2) < 0)
+	if (vec_norm(ref_basis2, &ref_basis2) < 0) {
         return TRIAD_NORM_FAILURE;
+    }
 
 	vec3 ref_basis3;
 	vec_cross(ref_basis1, ref_basis2, &ref_basis3);
-	if (vec_norm(ref_basis3, &ref_basis3) < 0)
-        return TRIAD_NORM_FAILURE:
+	if (vec_norm(ref_basis3, &ref_basis3) < 0) {
+        return TRIAD_NORM_FAILURE;
+    }
 
 	mat3 ref_triad;
 	mat_set_from_vec(

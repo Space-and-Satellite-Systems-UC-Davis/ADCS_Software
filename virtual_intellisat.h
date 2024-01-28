@@ -10,8 +10,7 @@
  *  repo by the CS team. While this means any ADCS code that uses
  *  these functions cannot run outside of the Intellisat repo, 
  *  this approach allows for complete separation of the two repos,
- *  which vastly simplifies development for everyone. And, while
- *  such code will not run, it will still compile!
+ *  which vastly simplifies development for everyone.
  *
  * @author Jacob Tkeio (jacobtkeio@gmail.com)
  * @date 9/25/2023

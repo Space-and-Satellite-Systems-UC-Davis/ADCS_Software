@@ -40,7 +40,6 @@ determination(
     );
 
     switch (tle_status) {
-        default:            return DET_UNHANDLED_ERROR;
         case NO_TLE:        return DET_NO_TLE;
         case TLE_SUCCESS:   break;
     }
@@ -66,7 +65,6 @@ determination(
     );
 
     switch (pos_status) {
-        default:                    return DET_UNHANDLED_ERROR;
         case SGP4_ERROR:            return DET_POS_LOOKUP_ERROR;
         case TEME2ITRS_ERROR:       return DET_POS_LOOKUP_ERROR;
         case ITRS2LLA_ERROR:        return DET_POS_LOOKUP_ERROR;
@@ -91,9 +89,8 @@ determination(
     );
 
     switch (sun_status) {
-        default:                        return DET_UNHANDLED_ERROR;
         case SUN_LOOKUP_BAD_DATE:       return DET_POS_LOOKUP_ERROR;
-        case SUN_LOOKUP_BAD_EVIRONMENT: return DET_POS_LOOKUP_ERROR;
+        case SUN_LOOKUP_BAD_ENVIRONMENT:return DET_POS_LOOKUP_ERROR;
         case SUN_LOOKUP_BAD_LLA:        return DET_POS_LOOKUP_ERROR;
         case SUN_LOOKUP_SUCCESS:        break;
     }
@@ -112,36 +109,6 @@ determination(
     ); //recalculate every time for now...
 
     switch (igrf_time_status) {
-        default:    return DET_UNHANDLED_ERROR;
-        case 0:     return DET_IGRF_TIME_ERROR;
-        case 1:     break;
-    }
-
-    igrf_update(
-        geocentric_latitude, //TODO: verify this is geocentric
-        longitude,
-        geocentric_radius,
-        1 //recalculate coefficients every time for now...
-    );
-
-    vec_set(
-        (double) B_ned[0],
-        (double) B_ned[1],
-        (double) B_ned[2],
-        &reference_mag
-    );
-
-    triad_run_status triad_status = 
-    triad(
-    	measured_sun,
-        measured_mag,
-    	reference_sun,
-        reference_mag,
-    	&realop_attitude //In ADCS.h
-    );
-
-    switch (triad_status) {
-        default:                    return DET_UNHANDLED_ERROR;
         case TRIAD_NORM_FAILURE:    return DET_TRIAD_ERROR;
         case TRIAD_SUCCESS:         break;
     }
