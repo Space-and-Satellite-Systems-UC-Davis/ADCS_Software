@@ -22,18 +22,19 @@ typedef enum {
 	ADCS_DETUMBLE,
 	ADCS_HDD,
 	ADCS_MRW
-} adcs_mode;
+} adcs_mode;        //TODO: full list
 
+typedef enum {
+   ADCS_MAIN_SUCCESS,
+   ADCS_MAIN_UNKNOWN,
+   ADCS_MAIN_ECLIPSE,
+   ADCS_MAIN_HDD_ERR,
+   ADCS_MAIN_MRW_ERR,
+   ADCS_MAIN_IMU_ERR
+} adcs_main_status; //TODO: full list
 
-void ADCS_MAIN(
-	adcs_mode mode,
-	int year,
-	int month,
-	int day,
-	int hour,
-	int min,
-	double sec
-);
+adcs_main_status
+ADCS_MAIN(adcs_mode mode);
 
 
 #endif//ADCS_H
