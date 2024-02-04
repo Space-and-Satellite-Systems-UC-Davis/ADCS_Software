@@ -109,6 +109,34 @@ determination(
     ); //recalculate every time for now...
 
     switch (igrf_time_status) {
+        case 0:     return DET_IGRF_TIME_ERROR;
+        case 1:     break;
+    }
+
+    igrf_update(
+        geocentric_latitude, //TODO: verify this is geocentric
+        longitude,
+        geocentric_radius,
+        1 //recalculate coefficients every time for now...
+    );
+
+    vec_set(
+        (double) igrf_B_ned[0],
+        (double) igrf_B_ned[1],
+        (double) igrf_B_ned[2],
+        &reference_mag
+    );
+
+    triad_run_status triad_status = 
+    triad(
+    	measured_sun,
+        measured_mag,
+    	reference_sun,
+        reference_mag,
+    	&realop_attitude //In ADCS.h
+    );
+
+    switch (triad_status) {
         case TRIAD_NORM_FAILURE:    return DET_TRIAD_ERROR;
         case TRIAD_SUCCESS:         break;
     }
