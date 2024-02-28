@@ -20,8 +20,8 @@ mat3 realop_attitude;
 
 typedef enum {
 	ADCS_DETUMBLE,
-	ADCS_HDD,
-	ADCS_MRW
+	ADCS_HDD_EXPERIMENT,
+	ADCS_MRW_EXPERIMENT
 } adcs_mode;        //TODO: full list
 
 typedef enum {
