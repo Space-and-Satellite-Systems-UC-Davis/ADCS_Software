@@ -62,7 +62,3 @@ ADCS_MAIN(adcs_mode mode) {
 adcs_mode ADCS_recommend_mode(){
 	return ADCS_HDD_EXPERIMENT;
 }
-
-
-
-
