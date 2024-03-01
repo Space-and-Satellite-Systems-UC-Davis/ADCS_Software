@@ -51,7 +51,7 @@ typedef enum {
  *
  * @return traid_run_status Error code.
  */
-traid_run_status
+triad_run_status
 triad(
 	vec3 bod_sun,
     vec3 bod_mag,
