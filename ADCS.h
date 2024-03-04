@@ -36,6 +36,9 @@ typedef enum {
 adcs_main_status
 ADCS_MAIN(adcs_mode mode);
 
+adcs_mode
+ADCS_recommend_mode();
+
 
 #endif//ADCS_H
 
