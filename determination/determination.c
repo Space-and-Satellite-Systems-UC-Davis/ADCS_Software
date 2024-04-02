@@ -93,7 +93,7 @@ determination(
     switch (sun_status) {
         default:                        return DET_UNHANDLED_ERROR;
         case SUN_LOOKUP_BAD_DATE:       return DET_POS_LOOKUP_ERROR;
-        case SUN_LOOKUP_BAD_EVIRONMENT: return DET_POS_LOOKUP_ERROR;
+        case SUN_LOOKUP_BAD_ENVIRONMENT:return DET_POS_LOOKUP_ERROR;
         case SUN_LOOKUP_BAD_LLA:        return DET_POS_LOOKUP_ERROR;
         case SUN_LOOKUP_SUCCESS:        break;
     }

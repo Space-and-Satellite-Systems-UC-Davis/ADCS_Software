@@ -56,7 +56,7 @@ triad(
 	vec3 ref_basis3;
 	vec_cross(ref_basis1, ref_basis2, &ref_basis3);
 	if (vec_norm(ref_basis3, &ref_basis3) < 0)
-        return TRIAD_NORM_FAILURE:
+        return TRIAD_NORM_FAILURE;
 
 	mat3 ref_triad;
 	mat_set_from_vec(
