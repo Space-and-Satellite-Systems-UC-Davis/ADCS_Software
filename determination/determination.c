@@ -125,9 +125,9 @@ determination(
     );
 
     vec_set(
-        (double) B_ned[0],
-        (double) B_ned[1],
-        (double) B_ned[2],
+        (double) igrf_B_ned[0],
+        (double) igrf_B_ned[1],
+        (double) igrf_B_ned[2],
         &reference_mag
     );
 

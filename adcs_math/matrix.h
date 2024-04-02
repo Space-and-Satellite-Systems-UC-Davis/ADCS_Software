@@ -24,12 +24,6 @@ typedef struct Matrix3x3 {
 } mat3; //Use "mat3" as the type.
 
 
-const mat3 Identity = {
-	1.0, 0.0, 0.0,
-	0.0, 1.0, 0.0,
-	0.0, 0.0, 1.0
-};
-
 
 /**@brief Load a matrix with the given values.
  *

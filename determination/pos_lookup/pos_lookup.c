@@ -12,7 +12,7 @@
 #include "determination/novasc3.1/novas.h"
 
 
-pos_lookup_success
+pos_lookup_status
 pos_lookup(
 	char *tle_line1,
 	char *tle_line2,
@@ -95,9 +95,9 @@ pos_lookup(
         altitude
     );
 
-    if (status_etg != 0)
+    if (status_etg != 0) {
         return ITRS2LLA_ERROR;
-
+    }
 
 	return POS_LOOKUP_SUCCESS;
 }
