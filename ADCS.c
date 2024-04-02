@@ -56,3 +56,10 @@ ADCS_MAIN(adcs_mode mode) {
 			break;
 	}
 }
+
+
+// ADCS recommend mode function for REALOP 0.5. HDD experiment will be the only available mode.
+adcs_mode ADCS_recommend_mode(){
+	return ADCS_HDD_EXPERIMENT;
+}
+
