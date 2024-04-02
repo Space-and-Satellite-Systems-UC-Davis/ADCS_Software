@@ -23,9 +23,10 @@ triad(
 	mat3 *output
 ) {
 	vec3 bod_basis1 = bod_mag;
-    if (vec_norm(bod_basis1, &bod_basis1) < 0) {
-        return TRIAD_NORM_FAILURE;
-    }
+
+  if (vec_norm(bod_basis1, &bod_basis1) < 0) {
+      return TRIAD_NORM_FAILURE;
+  }
 
 	vec3 bod_basis2;
 	vec_cross(bod_mag, bod_sun, &bod_basis2);

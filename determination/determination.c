@@ -40,6 +40,7 @@ determination(
     );
 
     switch (tle_status) {
+        default:            return DET_UNHANDLED_ERROR;
         case NO_TLE:        return DET_NO_TLE;
         case TLE_SUCCESS:   break;
     }
@@ -65,6 +66,7 @@ determination(
     );
 
     switch (pos_status) {
+        default:                    return DET_UNHANDLED_ERROR;
         case SGP4_ERROR:            return DET_POS_LOOKUP_ERROR;
         case TEME2ITRS_ERROR:       return DET_POS_LOOKUP_ERROR;
         case ITRS2LLA_ERROR:        return DET_POS_LOOKUP_ERROR;
@@ -89,6 +91,7 @@ determination(
     );
 
     switch (sun_status) {
+        default:                        return DET_UNHANDLED_ERROR;
         case SUN_LOOKUP_BAD_DATE:       return DET_POS_LOOKUP_ERROR;
         case SUN_LOOKUP_BAD_ENVIRONMENT:return DET_POS_LOOKUP_ERROR;
         case SUN_LOOKUP_BAD_LLA:        return DET_POS_LOOKUP_ERROR;
@@ -109,6 +112,7 @@ determination(
     ); //recalculate every time for now...
 
     switch (igrf_time_status) {
+        default:    return DET_UNHANDLED_ERROR;
         case 0:     return DET_IGRF_TIME_ERROR;
         case 1:     break;
     }
@@ -137,6 +141,7 @@ determination(
     );
 
     switch (triad_status) {
+        default:                    return DET_UNHANDLED_ERROR;
         case TRIAD_NORM_FAILURE:    return DET_TRIAD_ERROR;
         case TRIAD_SUCCESS:         break;
     }

@@ -1,5 +1,7 @@
-#include "adcs_math/vector.h"
+#ifndef DETERMINATION_H
+#define DETERMINATION_H
 
+#include "adcs_math/vector.h"
 
 typedef enum {
     DET_SUCCESS,
@@ -9,6 +11,7 @@ typedef enum {
     DET_TRIAD_ERROR,
     DET_UNHANDLED_ERROR
 } determination_status;
+
 
 determination_status
 determination(
@@ -21,3 +24,10 @@ determination(
     vec3 measured_mag,
     vec3 measured_sun
 );
+
+
+#endif//DETERMINATION_H
+
+
+
+
