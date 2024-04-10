@@ -1,5 +1,5 @@
-
 #include "igrf.h"
+
 
 // Gauss coefficients
 float g[IGRF_GEN][IGRF_GEN + 1];

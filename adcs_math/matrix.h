@@ -24,7 +24,6 @@ typedef struct Matrix3x3 {
 } mat3; //Use "mat3" as the type.
 
 
-
 /**@brief Load a matrix with the given values.
  *
  * @param [xyz][123] The value to put in the [xyz] row and [123] column.
