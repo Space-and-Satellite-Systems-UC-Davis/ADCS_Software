@@ -26,8 +26,8 @@ Note:
 #define IGRF_GEN 13
 
 //IGRF13 outputs
-volatile float B_ned[3] = {0.0, 0.0, 0.0}; // {N,E,D}
-volatile float B_sph[3] = {0.0, 0.0, 0.0}; // {Radial, Theta, Phi}
+extern float igrf_B_ned[3]; // {N,E,D}
+extern float igrf_B_sph[3]; // {Radial, Theta, Phi}
 
 uint8_t igrf_set_date_time(uint16_t year, uint8_t month, uint8_t day,
                            uint8_t hour, uint8_t min, uint8_t sec);

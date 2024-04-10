@@ -1,11 +1,13 @@
 #include "igrf.h"
 
-
 // Gauss coefficients
 float g[IGRF_GEN][IGRF_GEN + 1];
 float h[IGRF_GEN][IGRF_GEN + 1];
 
 float decimal_years = 0;                   // Decimal days since January 1, IGRF_START_YEAR
+
+float igrf_B_ned[3] = {0.0, 0.0, 0.0};
+float igrf_B_sph[3] = {0.0, 0.0, 0.0};
 
 // Schmidt quasi-normalized coefficients
 float g_val[104] = {
@@ -103,8 +105,8 @@ Inputs:
     r           = Geocentric radius, km
 
 Outputs:
-    igrf::B_ned[3] = B in North, East and Up direction respectively, nT
-    igrf::B_sph[3] = B in radial, theta and phi direction respectively, nT
+    igrf::igrf_B_ned[3] = B in North, East and Up direction respectively, nT
+    igrf::igrf_B_sph[3] = B in radial, theta and phi direction respectively, nT
 */
 void igrf_update(float latitude, float longitude, float radius, int interpolate_flag)
 {
@@ -198,27 +200,27 @@ void igrf_update(float latitude, float longitude, float radius, int interpolate_
     }
 
 
-    B_sph[0] =  B_radial;
-    B_sph[1] = -B_theta;
-    B_sph[2] = -B_phi / sin(theta);
-    B_ned[0] = -B_sph[1];
-    B_ned[1] = -B_sph[2];
-    B_ned[2] = -B_sph[0];
+    igrf_B_sph[0] =  B_radial;
+    igrf_B_sph[1] = -B_theta;
+    igrf_B_sph[2] = -B_phi / sin(theta);
+    igrf_B_ned[0] = -igrf_B_sph[1];
+    igrf_B_ned[1] = -igrf_B_sph[2];
+    igrf_B_ned[2] = -igrf_B_sph[0];
 }
 
 float igrf_get_horizontal_intensity()
 {
-    float x = B_ned[0];
-    float y = B_ned[1];
+    float x = igrf_B_ned[0];
+    float y = igrf_B_ned[1];
 
     return sqrt(x * x + y * y);
 }
 
 float igrf_get_inclination()
 {
-    float x = B_ned[0];
-    float y = B_ned[1];
-    float z = B_ned[2];
+    float x = igrf_B_ned[0];
+    float y = igrf_B_ned[1];
+    float z = igrf_B_ned[2];
     float hypotenuse = sqrt(x * x + y * y);
 
     return atan(z / hypotenuse);
@@ -226,17 +228,17 @@ float igrf_get_inclination()
 
 float igrf_get_declination()
 {
-    float x = B_ned[0];
-    float y = B_ned[1];
+    float x = igrf_B_ned[0];
+    float y = igrf_B_ned[1];
 
     return atan2(y, x);
 }
 
 float igrf_get_norm()
 {
-    float x = B_ned[0];
-    float y = B_ned[1];
-    float z = B_ned[2];
+    float x = igrf_B_ned[0];
+    float y = igrf_B_ned[1];
+    float z = igrf_B_ned[2];
 
     return sqrt(x * x + y * y + z * z);
 }

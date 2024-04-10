@@ -33,19 +33,6 @@ determination(
     char tle_line1[70]; //TODO: make these persistent so that we don't
     char tle_line2[70]; //have to ask Intellisat for them every time.
 
-    get_tle_status tle_status =
-    get_tle(
-        tle_line1,
-        tle_line2
-    );
-
-    switch (tle_status) {
-        default:            return DET_UNHANDLED_ERROR;
-        case NO_TLE:        return DET_NO_TLE;
-        case TLE_SUCCESS:   break;
-    }
-
-
     double longitude;
     double latitude;
     double altitude;
@@ -125,9 +112,9 @@ determination(
     );
 
     vec_set(
-        (double) B_ned[0],
-        (double) B_ned[1],
-        (double) B_ned[2],
+        (double) igrf_B_ned[0],
+        (double) igrf_B_ned[1],
+        (double) igrf_B_ned[2],
         &reference_mag
     );
 

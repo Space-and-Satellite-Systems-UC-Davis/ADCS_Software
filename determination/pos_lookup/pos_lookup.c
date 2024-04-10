@@ -12,7 +12,7 @@
 #include "determination/novasc3.1/novas.h"
 
 
-pos_lookup_success
+pos_lookup_status
 pos_lookup(
 	char *tle_line1,
 	char *tle_line2,
