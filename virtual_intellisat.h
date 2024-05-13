@@ -1,4 +1,4 @@
-/*@file virtual_intellisat.h
+/**@file virtual_intellisat.h
  *
  * @brief ADCS Software's interface to Intellisat.
  *
@@ -159,6 +159,7 @@ typedef enum{
 	GET_CONSTANT_SUCCESS,
 	GET_CONSTANT_FAILURE
 } vi_get_constant_status;
+
 
 /**@brief Get the current calibration values for a sensor.
  *

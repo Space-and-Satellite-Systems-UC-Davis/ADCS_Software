@@ -9,7 +9,7 @@ SOURCES := determination/determination.c determination/IGRF_C/igrf.c determinati
            determination/novasc3.1/novas.c determination/novasc3.1/novascon.c \
            determination/novasc3.1/solsys1.c determination/novasc3.1/eph_manager.c \
            determination/novasc3.1/readeph0.c determination/pos_lookup/ECEF_to_geodetic.c \
-           determination/novasc3.1/nutation.c
+           determination/novasc3.1/nutation.c main.c
 
 # Target executable name
 TARGET := altitude_determination
