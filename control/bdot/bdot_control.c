@@ -31,7 +31,8 @@ void bdot_control(
 
 	vec3 coils_output;  // = (-1) * derivative
 
-	vec_scalar(-1.0, derivative, &coils_output);
+	vec_scalar(-1.0, derivative, &derivative);
+	vec_cross(mag, derivative, &coils_output);
 	vec_scalar(control_constant, coils_output, &coils_output);
 
 	//cap output at maximum 0.158 Amps across all coils. 
