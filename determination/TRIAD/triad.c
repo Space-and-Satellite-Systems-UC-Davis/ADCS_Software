@@ -12,6 +12,7 @@
 #include "determination/TRIAD/triad.h"
 #include "adcs_math/vector.h"
 #include "adcs_math/matrix.h"
+#include "determination/TRIAD/triad.h"
 
 
 triad_run_status

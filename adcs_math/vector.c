@@ -82,7 +82,7 @@ double vec_dot(vec3 first, vec3 second) {
 }
 
 double vec_mag(vec3 vector) {
-	return sqrt(fabs(vec_dot(vector, vector)));
+	return sqrt(vec_dot(vector, vector));
 }
 
 

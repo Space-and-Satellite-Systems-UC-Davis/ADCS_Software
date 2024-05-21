@@ -3,6 +3,7 @@
 
 #include "adcs_math/vector.h"
 
+
 typedef enum {
     DET_SUCCESS,
     DET_NO_TLE,

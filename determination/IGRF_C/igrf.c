@@ -1,12 +1,14 @@
 
 #include "igrf.h"
 
-
 // Gauss coefficients
 float g[IGRF_GEN][IGRF_GEN + 1];
 float h[IGRF_GEN][IGRF_GEN + 1];
 
 float decimal_years = 0;                   // Decimal days since January 1, IGRF_START_YEAR
+
+float igrf_B_ned[3] = {0.0, 0.0, 0.0};
+float igrf_B_sph[3] = {0.0, 0.0, 0.0};
 
 // Schmidt quasi-normalized coefficients
 float g_val[104] = {

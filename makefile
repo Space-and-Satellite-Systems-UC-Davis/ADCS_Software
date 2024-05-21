@@ -16,8 +16,8 @@ TARGET := altitude_determination
 
 all: $(TARGET)
 
-$(TARGET):
-	$(CC) $(CFLAGS) $(SOURCES) -o $@
+$(TARGET): $(SOURCES)
+	$(CC) $(SOURCES) $(CFLAGS) -o $@
 
 run:
 	./$(TARGET)
