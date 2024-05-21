@@ -95,9 +95,9 @@ pos_lookup(
         altitude
     );
 
-    if (status_etg != 0)
+    if (status_etg != 0) {
         return ITRS2LLA_ERROR;
-
+    }
 
 	return POS_LOOKUP_SUCCESS;
 }

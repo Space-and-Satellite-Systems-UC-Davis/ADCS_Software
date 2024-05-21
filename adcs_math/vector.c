@@ -61,8 +61,9 @@ void vec_bisect(vec3 left, vec3 right, vec3 *output) {
 int vec_norm(vec3 vector, vec3 *output) {
     double mag = vec_mag(vector);
 
-    if (fabs(mag) < 1e-6) 
+    if (fabs(mag) < 1e-6) {
         return -1;
+    }
 
 	vec_scalar(
 		1 / mag,

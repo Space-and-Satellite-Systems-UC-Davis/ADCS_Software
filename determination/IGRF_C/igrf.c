@@ -1,3 +1,4 @@
+
 #include "igrf.h"
 
 // Gauss coefficients
@@ -105,8 +106,8 @@ Inputs:
     r           = Geocentric radius, km
 
 Outputs:
-    igrf::igrf_B_ned[3] = B in North, East and Up direction respectively, nT
-    igrf::igrf_B_sph[3] = B in radial, theta and phi direction respectively, nT
+    igrf_B_ned[3] = B in North, East and Up direction respectively, nT
+    igrf_B_sph[3] = B in radial, theta and phi direction respectively, nT
 */
 void igrf_update(float latitude, float longitude, float radius, int interpolate_flag)
 {
@@ -198,7 +199,6 @@ void igrf_update(float latitude, float longitude, float radius, int interpolate_
             }
         }
     }
-
 
     igrf_B_sph[0] =  B_radial;
     igrf_B_sph[1] = -B_theta;

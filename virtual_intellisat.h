@@ -1,4 +1,4 @@
-/**@file virtual_intellisat.h
+/*@file virtual_intellisat.h
  *
  * @brief ADCS Software's interface to Intellisat.
  *
@@ -10,8 +10,7 @@
  *  repo by the CS team. While this means any ADCS code that uses
  *  these functions cannot run outside of the Intellisat repo, 
  *  this approach allows for complete separation of the two repos,
- *  which vastly simplifies development for everyone. And, while
- *  such code will not run, it will still compile!
+ *  which vastly simplifies development for everyone.
  *
  * @author Jacob Tkeio (jacobtkeio@gmail.com)
  * @date 12/30/2023
@@ -25,6 +24,23 @@ typedef enum {
     GET_EPOCH_SUCCESS,
     GET_EPOCH_FAILURE
 } vi_get_epoch_status;
+
+/**@brief Report the current date and time to second accuracy.
+ *
+ * @param year,month,day,hour,minute,second Return-by-reference ptrs.
+ *
+ * @return vi_get_epoch_status A return code.
+ */
+vi_get_epoch_status
+vi_get_epoch(
+    int *year,
+    int *month,
+    int *day,
+    int *hour,
+    int *minute,
+    int *second
+);
+
 
 /**@brief Report the current date and time to second accuracy.
  *
@@ -68,6 +84,47 @@ typedef enum {
     GET_ANGVEL_SUCCESS,
     GET_ANGVEL_FAILURE
 } vi_get_angvel_status;
+
+/**@brief Retrieve angular velocity data from the IMU.
+ *
+ * @param angvel_x,angvel_y,angvel_z Return-by-reference ptrs.
+ *
+ * The sign of the angular velocity values must adhere to the
+ *   Right-Hand-Rule as defined by the satellite's positive axes.
+ *
+ * @return vi_get_angvel_status A return code.
+ */
+vi_get_angvel_status
+vi_get_angvel(
+    double *angvel_x, 
+    double *angvel_y,
+    double *angvel_z
+);
+
+
+
+typedef enum {
+    HDD_COMMAND_SUCCESS,
+    HDD_COMMAND_FAILURE
+} vi_hdd_command_status;
+
+/**@brief Send a throttle command to the HDD.
+ *
+ * @param throttle The desired throttle in the range [-1.0, 1.0].
+ *
+ * Intellisat must check these bounds for the input.
+ *
+ * Positive throttle must correspond to positive angular
+ *   acceleration as defined by the satellite's positive Z axis
+ *   and the Right-Hand-Rule.
+ *
+ * @return vi_hdd_command_status A return code.
+ */
+vi_hdd_command_status
+vi_hdd_command(
+    double throttle
+);
+
 
 /**@brief Retrieve angular velocity data from the IMU.
  *

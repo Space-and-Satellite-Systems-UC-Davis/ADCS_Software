@@ -81,9 +81,7 @@ sun_lookup(
 
             return SUN_LOOKUP_BAD_LLA;
 
-        case 0:
-
-            return SUN_LOOKUP_SUCCESS;
+        case 0: break; //Success!
     }
 
 

@@ -29,6 +29,7 @@ Note:
 extern float igrf_B_ned[3]; // {N,E,D}
 extern float igrf_B_sph[3]; // {Radial, Theta, Phi}
 
+
 uint8_t igrf_set_date_time(uint16_t year, uint8_t month, uint8_t day,
                            uint8_t hour, uint8_t min, uint8_t sec);
 
@@ -43,8 +44,8 @@ Inputs:
     r           = Geocentric radius, km
 
 Outputs:
-    igrf::B_ned[3] = B in North, East and Up direction respectively, nT
-    igrf::B_sph[3] = B in radial, theta and phi direction respectively, nT
+    igrf_B_ned[3] = B in North, East and Up direction respectively, nT
+    igrf_B_sph[3] = B in radial, theta and phi direction respectively, nT
 */
 void igrf_update(float latitude, float longitude, float radius, int interpolate_flag);
 
