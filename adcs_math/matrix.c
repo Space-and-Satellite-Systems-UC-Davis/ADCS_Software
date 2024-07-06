@@ -88,6 +88,16 @@ void mat_mult(mat3 left, mat3 right, mat3 *output) {
 	);
 }
 
+void mat_vec_mult(mat3 left, vec3 right, vec3 *output) {
+    vec_set(
+        left.x1*right.x + left.x2*right.y + left.x3*right.z,
+        left.y1*right.x + left.y2*right.y + left.y3*right.z,
+        left.z1*right.x + left.z2*right.y + left.z3*right.z,
+        output
+    );
+}
+
+
 double mat_det(mat3 mat) {
 	return 
 		mat.x1 * (mat.y2*mat.z3 - mat.z2*mat.y3) -

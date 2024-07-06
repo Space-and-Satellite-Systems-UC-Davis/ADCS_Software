@@ -91,6 +91,17 @@ void mat_scalar(double scalar, mat3 matrix, mat3 *output);
 void mat_mult(mat3 left, mat3 right, mat3 *output);
 
 
+/**@brief Multiply a matrix with a vector.
+ *
+ * @param left The matrix on the left side of the multiplication.
+ * @param right The vector on the right side of the multiplication.
+ * @param output The vec3* that will hold the result.
+ *
+ * @return Void.
+ */
+void mat_vec_mult(mat3 left, vec3 right, vec3 *output);
+
+
 /**@breif Calculate the determinant of a matrix.
  *
  * @param matrix The matrix for which to calculate the determinant.

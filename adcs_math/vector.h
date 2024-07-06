@@ -63,6 +63,16 @@ void vec_cross(vec3 left, vec3 right, vec3 *output);
 void vec_add(vec3 first, vec3 second, vec3 *output);
 
 
+/**@brief Subtract two vectors element-by-element
+ *
+ * @param first, second The vectors to subtract.
+ * @param output The vec3* that will hold the result of the subtraction.
+ *
+ * @return Void.
+ */
+void vec_sub(vec3 first, vec3 second, vec3 *output); 
+
+
 /**@brief Find the bisector of two vectors.
  *
  * In this implementation, the bisector's length is the average of the

@@ -47,6 +47,15 @@ void vec_add(vec3 left, vec3 right, vec3 *output) {
 	);
 }
 
+void vec_sub(vec3 left, vec3 right, vec3 *output) {
+    vec_set(
+        left.x - right.x,
+        left.y - right.y,
+        left.z - right.z,
+        output
+    );
+}
+
 void vec_bisect(vec3 left, vec3 right, vec3 *output) {
 	vec3 sum_vector;
 	vec_add(left, right, &sum_vector);
