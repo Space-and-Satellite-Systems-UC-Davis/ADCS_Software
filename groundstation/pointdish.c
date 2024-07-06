@@ -87,10 +87,11 @@ int satellite_pos(char* tle1, char* tle2, double UTC1, double UTC2, vec3 *output
 int main() {
     double az;
     double el;
-    char* tle1 = "1 25544U 98067A   24188.50795102  .00013368  00000-0  24465-3 0  9997";
-    char *tle2 = "2 25544  51.6394 219.6033 0010258  37.0957 113.5575 15.49623297461546";
+    char* tle1 = (char*) malloc(70*sizeof(char));
+    char* tle2 = (char*) malloc(70*sizeof(char));
     double lat;
     double lon;
+    double UTC;
 
     printf("Enter groundstation latitude (deg): ");
     scanf(" %lf", &lat);
@@ -98,7 +99,15 @@ int main() {
     printf("Enter groundstation longitude (deg): ");
     scanf(" %lf", &lon);
 
-    double UTC = 2460498.26611;
+    printf("Enter tle line 1: ");
+    scanf(" %s", tle1);
+
+    printf("Enter tle line 2: ");
+    scanf(" %s", tle2);
+
+    printf("Enter julian date: ");
+    scanf(" %lf", &UTC);
+
     vec3 satellite_position;
 
     if (satellite_pos(tle1, tle2, UTC, 0.0, &satellite_position) != POS_LOOKUP_SUCCESS) {
