@@ -6,6 +6,7 @@
 #include "adcs_math/matrix.h"
 #include <math.h>
 
+
 void point_dish(double gs_lat, double gs_lon, vec3 sat_pos_ecef, double *dish_az, double *dish_el){
     double R_earth = 6371.0; // Could customize to our particular ground station, although that might be overkill
 
@@ -85,38 +86,35 @@ int satellite_pos(char* tle1, char* tle2, double UTC1, double UTC2, vec3 *output
 }
 
 int main() {
+
+ 
+    // { echo "38.53"; echo "121.76"; curl -s 'https://tle.ivanstanojevic.me/api/tle/25544' | jq '.line1, .line2' | tr -d '"'; curl -s "https://ssd-api.jpl.nasa.gov/jd_cal.api?cd=$(date +%F_%T)" | jq -r '.jd'; } | ./pointdish
+ 
+    char lines[5][100]; //pipe to here 
+
     double az;
-    double el;
-    char* tle1 = (char*) malloc(70*sizeof(char));
-    char* tle2 = (char*) malloc(70*sizeof(char));
-    double lat;
-    double lon;
-    double UTC;
+    double el; 
 
-    printf("Enter groundstation latitude (deg): ");
-    scanf(" %lf", &lat);
 
-    printf("Enter groundstation longitude (deg): ");
-    scanf(" %lf", &lon);
+    for (int i=0; i<=4; i++){
+        fgets(lines[i], sizeof(lines[i]), stdin);  
+        //printf("%s", lines[i]);
+    }
+    double lat = strtod(lines[0], NULL); 
+    double lon = strtod(lines[1], NULL); 
+    char* tle1 = lines[2];
+    char* tle2 = lines[3];  
+    double UTC = strtod(lines[4], NULL); 
 
-    printf("Enter tle line 1: ");
-    scanf(" %s", tle1);
-
-    printf("Enter tle line 2: ");
-    scanf(" %s", tle2);
-
-    printf("Enter julian date: ");
-    scanf(" %lf", &UTC);
 
     vec3 satellite_position;
-
     if (satellite_pos(tle1, tle2, UTC, 0.0, &satellite_position) != POS_LOOKUP_SUCCESS) {
         return -4;
     }
+    else  {printf("made it\n");}
+
 
     point_dish(lat, lon, satellite_position, &az, &el);
-
-    printf("Azimuth = %lf, Elevation = %lf\n", az, el);
-
+    printf("Azimuth = %lf, Elevation = %lf\n", az, el); 
     return 0;
 }
