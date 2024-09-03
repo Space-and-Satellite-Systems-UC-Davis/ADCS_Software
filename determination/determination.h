@@ -1,6 +1,3 @@
-#ifndef DETERMINATION_H
-#define DETERMINATION_H
-
 #include "adcs_math/vector.h"
 
 #ifndef DETERMINATION_H
