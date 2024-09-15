@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -I. -lm -Wswitch
+CFLAGS := -I. -lm -shared -Wswitch -fpic
 
 # Source files
 SOURCES := determination/determination.c determination/IGRF_C/igrf.c determination/TRIAD/triad.c \
@@ -9,10 +9,10 @@ SOURCES := determination/determination.c determination/IGRF_C/igrf.c determinati
            determination/novasc3.1/novas.c determination/novasc3.1/novascon.c \
            determination/novasc3.1/solsys1.c determination/novasc3.1/eph_manager.c \
            determination/novasc3.1/readeph0.c determination/pos_lookup/ECEF_to_geodetic.c \
-           determination/novasc3.1/nutation.c main.c
+           determination/novasc3.1/nutation.c
 
 # Target executable name
-TARGET := altitude_determination
+TARGET := libADCS.so
 
 all: $(TARGET)
 
