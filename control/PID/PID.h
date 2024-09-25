@@ -22,6 +22,7 @@ typedef struct {
  * @param target The current target for the system. May be changed over time.
  * @param state The current state of the system.
  * @param t_curr The current time in seconds.
+ * @param controller Pointer to the PID_controller struct.
  *
  * @return a command to the actuator.
  */
@@ -40,6 +41,7 @@ double PID_command(
  * @param P_gain The gain for the proportional term of the controller.
  * @param I_gain The gain for the integral term of the controller.
  * @param D_gain The gain for the derivative term of the controller.
+ * @param controller Pointer to the PID_controller struct.
  *
  * @return a command to the actuator.
  */
