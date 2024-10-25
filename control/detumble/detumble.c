@@ -16,7 +16,7 @@ detumble_status detumble()
 	int delta_t;
 	vec3 angvel;
 	vec3 coils_curr;
-	int curr_millis=0,previous_millis=0;
+	int curr_millis=0,prev_millis=0;
 
 	int magx,magy,magz;
 	vi_get_angvel_status angvel_status;
@@ -38,10 +38,10 @@ detumble_status detumble()
 
 	vi_get_mag(&(mag.x), &(mag.y), &(mag.z));
 
-	while( 0.5 < angvel.x  || 0.5 < angvel.y || angvel.z > 0.5)
+	while( 0.5 < angvel.x  || 0.5 < angvel.y || 0.5 < angvel.z)
 	{
 		mag_prev = mag;
-		previous_millis = curr_millis;
+		prev_millis= curr_millis;
 		time_status = vi_get_curr_millis(&curr_millis);
 
 		if(time_status == GET_CURR_MILLIS_FAILURE)
@@ -58,7 +58,7 @@ detumble_status detumble()
 
 		vi_get_mag(&(mag.x), &(mag.y), &(mag.z));
 
-		delta_t=curr_millis-previous_millis;
+		delta_t=curr_millis-prev_millis;
 
 		bdot_control(mag, mag_prev, delta_t, &coils_curr);
 	}
