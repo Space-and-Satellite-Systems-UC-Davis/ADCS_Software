@@ -108,14 +108,8 @@ determination(
         geocentric_latitude, //TODO: verify this is geocentric
         longitude,
         geocentric_radius,
-        1 //recalculate coefficients every time for now...
-    );
-
-    vec_set(
-        (double) igrf_B_ned[0],
-        (double) igrf_B_ned[1],
-        (double) igrf_B_ned[2],
-        &reference_mag
+        1, //recalculate coefficients every time for now...
+		&reference_mag
     );
 
     triad_run_status triad_status = 

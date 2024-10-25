@@ -49,7 +49,7 @@ typedef enum {
  * @param output The mat3* that will hold the satellite's attitude
  *  as a direction cosine matrix.
  *
- * @return traid_run_status Error code.
+ * @return triad_run_status Error code.
  */
 triad_run_status
 triad(

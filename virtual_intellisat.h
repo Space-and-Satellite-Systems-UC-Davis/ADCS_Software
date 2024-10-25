@@ -19,7 +19,6 @@
 #ifndef VIRTUAL_INTELLISAT_H
 #define VIRTUAL_INTELLISAT_H
 
-
 typedef enum {
     GET_EPOCH_SUCCESS,
     GET_EPOCH_FAILURE
@@ -202,5 +201,16 @@ vi_ADCS_get_sensor_status(
 	int *sensor_status
 );
 
+typedef enum {
+	VI_GET_MAG_SUCCESS,
+	VI_GET_MAG_FAILURE
+} vi_get_mag_status;
+
+vi_get_mag_status
+vi_get_mag(
+	double *mag_x,
+	double *mag_y,
+	double *mag_z
+);
 
 #endif//VIRTUAL_INTELLISAT_H
