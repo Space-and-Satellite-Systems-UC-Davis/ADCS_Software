@@ -17,6 +17,7 @@ Note:
 
 #include <math.h>
 #include <inttypes.h>
+#include "adcs_math/vector.h"
 
 #define PI 3.14159265358979323846
 #define PI_2 1.57079632679489661923
@@ -46,8 +47,10 @@ Inputs:
 Outputs:
     igrf_B_ned[3] = B in North, East and Up direction respectively, nT
     igrf_B_sph[3] = B in radial, theta and phi direction respectively, nT
+	
+	B_ned = pointer to an adcs_math vec3 struct to be modified
 */
-void igrf_update(float latitude, float longitude, float radius, int interpolate_flag);
+void igrf_update(float latitude, float longitude, float radius, int interpolate_flag, vec3* B_ned);
 
 float igrf_get_horizontal_intensity();
 float igrf_get_inclination();

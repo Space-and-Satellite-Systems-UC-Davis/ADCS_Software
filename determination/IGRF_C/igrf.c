@@ -1,4 +1,5 @@
-#include "igrf.h"
+#include "determination/IGRF_C/igrf.h"
+#include "adcs_math/vector.h"
 
 
 // Gauss coefficients
@@ -104,12 +105,13 @@ Inputs:
     latitude    = Latitude measured in degrees positive from equator, radians
     longitude   = Longitude measured in degrees positive east from Greenwich, radians
     r           = Geocentric radius, km
+	*B_ned      = Return by reference vector for magnetic field, nT
 
 Outputs:
     igrf_B_ned[3] = B in North, East and Up direction respectively, nT
     igrf_B_sph[3] = B in radial, theta and phi direction respectively, nT
 */
-void igrf_update(float latitude, float longitude, float radius, int interpolate_flag)
+void igrf_update(float latitude, float longitude, float radius, int interpolate_flag, vec3 *B_ned)
 {
 
     float a = 6371.2; // Radius of Earth, Km
@@ -206,6 +208,11 @@ void igrf_update(float latitude, float longitude, float radius, int interpolate_
     igrf_B_ned[0] = -igrf_B_sph[1];
     igrf_B_ned[1] = -igrf_B_sph[2];
     igrf_B_ned[2] = -igrf_B_sph[0];
+
+	vec_set((double) igrf_B_ned[0], 
+			(double) igrf_B_ned[1],
+			(double) igrf_B_ned[2], 
+			B_ned);
 }
 
 float igrf_get_horizontal_intensity()
