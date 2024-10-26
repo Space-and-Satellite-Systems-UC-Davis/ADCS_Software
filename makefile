@@ -9,7 +9,8 @@ SOURCES := determination/determination.c determination/mag_lookup/mag_lookup.c d
            determination/novasc3.1/novas.c determination/novasc3.1/novascon.c \
            determination/novasc3.1/solsys1.c determination/novasc3.1/eph_manager.c \
            determination/novasc3.1/readeph0.c determination/pos_lookup/ECEF_to_geodetic.c \
-           determination/novasc3.1/nutation.c control/detumble/detumble.c control/bdot/bdot_control.c
+           determination/novasc3.1/nutation.c control/detumble/detumble.c control/bdot/bdot_control.c \
+		   control/ramp/ramp.c
 
 # Target executable name
 TARGET := libADCS.so
