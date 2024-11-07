@@ -1,4 +1,3 @@
-
 #include "determination/determination.h"
 #include "determination/novasc3.1/novas.h"
 
@@ -23,15 +22,25 @@ determination(
     int minute,
     double second,
     vec3 measured_mag,
-    vec3 measured_sun
+    vec3 measured_sun,
+    mat3 *attitude
 ) {
     double UTC = julian_date(
         year, month, day,
         hour + minute/60.0 + second/3600.0
     );
 
-    char tle_line1[70]; //TODO: make these persistent so that we don't
-    char tle_line2[70]; //have to ask Intellisat for them every time.
+    char *tle_line1;
+    char *tle_line2;
+
+    vi_get_constant_status tle_status =
+    vi_ADCS_get_TLE(tle_line1, tle_line2);
+
+    switch (tle_status) {
+        case GET_CONSTANT_FAILURE: return DET_NO_TLE;
+        case GET_CONSTANT_SUCCESS: break;
+    }
+
 
     double longitude;
     double latitude;
@@ -53,7 +62,6 @@ determination(
     );
 
     switch (pos_status) {
-        default:                    return DET_UNHANDLED_ERROR;
         case SGP4_ERROR:            return DET_POS_LOOKUP_ERROR;
         case TEME2ITRS_ERROR:       return DET_POS_LOOKUP_ERROR;
         case ITRS2LLA_ERROR:        return DET_POS_LOOKUP_ERROR;
@@ -78,7 +86,6 @@ determination(
     );
 
     switch (sun_status) {
-        default:                        return DET_UNHANDLED_ERROR;
         case SUN_LOOKUP_BAD_DATE:       return DET_POS_LOOKUP_ERROR;
         case SUN_LOOKUP_BAD_ENVIRONMENT:return DET_POS_LOOKUP_ERROR;
         case SUN_LOOKUP_BAD_LLA:        return DET_POS_LOOKUP_ERROR;
@@ -105,12 +112,13 @@ determination(
     }
 
     igrf_update(
-        geocentric_latitude, //TODO: verify this is geocentric
+        geocentric_latitude,
         longitude,
         geocentric_radius,
         1, //recalculate coefficients every time for now...
 		&reference_mag
     );
+
 
     triad_run_status triad_status = 
     triad(
@@ -118,11 +126,10 @@ determination(
         measured_mag,
     	reference_sun,
         reference_mag,
-    	&realop_attitude //In ADCS.h
+    	attitude
     );
 
     switch (triad_status) {
-        default:                    return DET_UNHANDLED_ERROR;
         case TRIAD_NORM_FAILURE:    return DET_TRIAD_ERROR;
         case TRIAD_SUCCESS:         break;
     }
