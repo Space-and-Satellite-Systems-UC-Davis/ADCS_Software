@@ -1,7 +1,17 @@
-#include "adcs_math/vector.h"
+/**@file determination/determination.h
+ *
+ * @brief Interface to attitude determination routine.
+ *
+ * @author Jacob Tkeio (jacobtkeio@gmail.com)
+ *
+ * @date 12/2/2023
+ */
 
 #ifndef DETERMINATION_H
 #define DETERMINATION_H
+
+#include "adcs_math/vector.h"
+#include "adcs_math/matrix.h"
 
 
 typedef enum {
@@ -14,6 +24,17 @@ typedef enum {
 } determination_status;
 
 
+/**@brief Calculate attitude from time and sun+mag vectors.
+ *
+ * Will run SGP4, SPA, and IGRF.
+ *
+ * @param year,month,day,hour,minute,second The current time.
+ * @param measured_mag The measured magnetic field vector.
+ * @param measured_sun The measured sun vector.
+ * @param attitude Return-by-reference ptr to attitude matrix.
+ *
+ * @return Status code.
+ */
 determination_status
 determination(
     int year,
@@ -23,7 +44,8 @@ determination(
     int minute,
     double second,
     vec3 measured_mag,
-    vec3 measured_sun
+    vec3 measured_sun,
+    mat3 *attitude
 );
 
 
