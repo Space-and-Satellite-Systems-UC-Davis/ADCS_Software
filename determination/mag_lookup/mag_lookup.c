@@ -1,4 +1,4 @@
-#include "determination/IGRF_C/igrf.h"
+#include "determination/mag_lookup/mag_lookup.h"
 #include "adcs_math/vector.h"
 
 

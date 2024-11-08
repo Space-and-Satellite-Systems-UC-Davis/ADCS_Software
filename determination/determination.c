@@ -3,7 +3,7 @@
 
 #include "determination/pos_lookup/pos_lookup.h"
 #include "determination/sun_lookup/sun_lookup.h"
-#include "determination/IGRF_C/igrf.h"
+#include "determination/mag_lookup/mag_lookup.h"
 #include "determination/TRIAD/triad.h"
 
 #include "adcs_math/vector.h"
