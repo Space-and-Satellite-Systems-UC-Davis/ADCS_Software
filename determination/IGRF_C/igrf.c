@@ -105,7 +105,7 @@ Inputs:
     latitude    = Latitude measured in degrees positive from equator, radians
     longitude   = Longitude measured in degrees positive east from Greenwich, radians
     r           = Geocentric radius, km
-	*B_ned      = Return by reference vector for magnetic field, nT
+    *B_ned      = Return by reference vector for magnetic field, nT
 
 Outputs:
     igrf_B_ned[3] = B in North, East and Up direction respectively, nT
@@ -206,13 +206,13 @@ void igrf_update(float latitude, float longitude, float radius, int interpolate_
     igrf_B_sph[1] = -B_theta;
     igrf_B_sph[2] = -B_phi / sin(theta);
     igrf_B_ned[0] = -igrf_B_sph[1];
-    igrf_B_ned[1] = -igrf_B_sph[2];
+    igrf_B_ned[1] =  igrf_B_sph[2];
     igrf_B_ned[2] = -igrf_B_sph[0];
 
-	vec_set((double) igrf_B_ned[0], 
-			(double) igrf_B_ned[1],
-			(double) igrf_B_ned[2], 
-			B_ned);
+    vec_set((double) igrf_B_ned[0], 
+            (double) igrf_B_ned[1],
+            (double) igrf_B_ned[2], 
+            B_ned);
 }
 
 float igrf_get_horizontal_intensity()
