@@ -6,7 +6,7 @@
 float g[IGRF_GEN][IGRF_GEN + 1];
 float h[IGRF_GEN][IGRF_GEN + 1];
 
-float decimal_years = 0;                   // Decimal days since January 1, IGRF_START_YEAR
+float decimal_years = 0;    // Decimal days since January 1, IGRF_START_YEAR
 
 float igrf_B_ned[3] = {0.0, 0.0, 0.0};
 float igrf_B_sph[3] = {0.0, 0.0, 0.0};
@@ -98,19 +98,6 @@ void compute_gauss_coeffs(float decimal_years_) {
     }
 }
 
-/*
-   ~ Compute magnetic field strength in local coordinates, nT ~
-
-Inputs:
-    latitude    = Latitude measured in degrees positive from equator, radians
-    longitude   = Longitude measured in degrees positive east from Greenwich, radians
-    r           = Geocentric radius, km
-    *B_ned      = Return by reference vector for magnetic field, nT
-
-Outputs:
-    igrf_B_ned[3] = B in North, East and Up direction respectively, nT
-    igrf_B_sph[3] = B in radial, theta and phi direction respectively, nT
-*/
 void igrf_update(float latitude, float longitude, float radius, int interpolate_flag, vec3 *B_ned)
 {
 
