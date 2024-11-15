@@ -152,7 +152,7 @@ typedef enum{
 	IMU1_Z,
 	IMU2_Z,
 //End IMU
-} vi_ADCS_sensors;
+} vi_sensors;
 
 typedef enum{
 	GET_CONSTANT_SUCCESS,
@@ -168,8 +168,8 @@ typedef enum{
  * @return vi_get_constant_status A return code, success/failure.
  */
 vi_get_constant_status
-vi_ADCS_get_calibration(
-	vi_ADCS_sensors sensor, 
+vi_get_sensor_calibration(
+	vi_sensors sensor, 
 	float *offset,
 	float *scalar
 );
@@ -182,7 +182,7 @@ vi_ADCS_get_calibration(
  * @return vi_get_constant_status A return code, success/failure.
  */
 vi_get_constant_status
-vi_ADCS_get_TLE(
+vi_get_TLE(
 	char *tle_line1, 
 	char *tle_line2
 );
@@ -196,8 +196,8 @@ vi_ADCS_get_TLE(
  * @return vi_get_constant_status A return code, success/failure.
  */
 vi_get_constant_status
-vi_ADCS_get_sensor_status(
-	vi_ADCS_sensors sensor,
+vi_get_sensor_status(
+	vi_sensors sensor,
 	int *sensor_status
 );
 
