@@ -34,7 +34,7 @@ determination(
     char *tle_line2;
 
     vi_get_constant_status tle_status =
-    vi_ADCS_get_TLE(tle_line1, tle_line2);
+    vi_get_TLE(tle_line1, tle_line2);
 
     switch (tle_status) {
         case GET_CONSTANT_FAILURE: return DET_NO_TLE;
