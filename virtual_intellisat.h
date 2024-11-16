@@ -175,13 +175,19 @@ vi_get_sensor_calibration(
 );
 
 
+typedef enum{
+	GET_TLE_SUCCESS_NEW,
+	GET_TLE_SUCCESS_OLD,
+	GET_TLE_FAILURE
+} vi_get_TLE_status;
+
 /**@brief Get the current TLE.
  *
  * @param TLE line 1 and line 2 Return-by-reference ptrs.
  *
  * @return vi_get_constant_status A return code, success/failure.
  */
-vi_get_constant_status
+vi_get_TLE_status
 vi_get_TLE(
 	char *tle_line1, 
 	char *tle_line2

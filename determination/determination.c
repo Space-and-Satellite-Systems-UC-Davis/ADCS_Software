@@ -33,12 +33,13 @@ determination(
     char *tle_line1;
     char *tle_line2;
 
-    vi_get_constant_status tle_status =
+    vi_get_TLE_status tle_status =
     vi_get_TLE(tle_line1, tle_line2);
 
     switch (tle_status) {
-        case GET_CONSTANT_FAILURE: return DET_NO_TLE;
-        case GET_CONSTANT_SUCCESS: break;
+        case GET_TLE_FAILURE: return DET_NO_TLE;
+        case GET_TLE_SUCCESS_OLD: break;
+        case GET_TLE_SUCCESS_NEW: break;
     }
 
 
