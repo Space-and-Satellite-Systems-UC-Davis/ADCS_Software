@@ -28,6 +28,11 @@ Author:
 #define IGRF_GEN 13
 
 
+typedef enum {
+    IGRF_SET_DATE_SUCCESS,
+    IGRF_SET_DATE_OUT_OF_BOUNDS
+} igrf_set_date_status;
+
 /**@brief Update IGRF's date/time state variable.
  *
  * The time only needs to be updated before running
@@ -37,8 +42,9 @@ Author:
  *
  * @return Status code.
  */
-uint8_t igrf_set_date_time(uint16_t year, uint8_t month, uint8_t day,
-                           uint8_t hour, uint8_t min, uint8_t sec);
+igrf_set_date_status
+igrf_set_date_time(uint16_t year, uint8_t month, uint8_t day,
+                   uint8_t hour, uint8_t min, uint8_t sec);
 
 /*
    ~ Compute magnetic field strength in local coordinates, nT ~

@@ -110,9 +110,10 @@ determination(
     ); //recalculate every time for now...
 
     switch (igrf_time_status) {
-        default:    return DET_UNHANDLED_ERROR;
-        case 0:     return DET_IGRF_TIME_ERROR;
-        case 1:     break;
+        case IGRF_SET_DATE_OUT_OF_BOUNDS:
+            return DET_IGRF_TIME_ERROR;
+        case IGRF_SET_DATE_SUCCESS:
+            break;
     }
 
     igrf_update(
