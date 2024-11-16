@@ -237,7 +237,9 @@ float igrf_get_norm()
     return sqrt(x * x + y * y + z * z);
 }
 
-uint8_t igrf_set_date_time(uint16_t year, uint8_t month, uint8_t day,
+
+igrf_set_date_status
+igrf_set_date_time(uint16_t year, uint8_t month, uint8_t day,
                            uint8_t hour, uint8_t min, uint8_t sec)
 {
     decimal_years = 0;
@@ -245,7 +247,7 @@ uint8_t igrf_set_date_time(uint16_t year, uint8_t month, uint8_t day,
     if ((year < IGRF_START_YEAR) || (year > IGRF_END_YEAR) ||
         (month > 12) || (day > 31) || (hour > 23) || (min > 60) || (sec > 60))
     {
-        return 0;
+        return IGRF_SET_DATE_OUT_OF_BOUNDS;
     }
 
     // Count complete years
@@ -266,5 +268,5 @@ uint8_t igrf_set_date_time(uint16_t year, uint8_t month, uint8_t day,
     decimal_years = complete_years + day_in_year / total_days_in_year +
                     hour_in_day / (24.0f * total_days_in_year);
 
-    return 1;
+    return IGRF_SET_DATE_SUCCESS;
 }
