@@ -30,8 +30,10 @@ determination(
         hour + minute/60.0 + second/3600.0
     );
 
+    int update_IGRF = 0; //false
     char *tle_line1;
     char *tle_line2;
+
 
     vi_get_TLE_status tle_status =
     vi_get_TLE(tle_line1, tle_line2);
@@ -39,7 +41,8 @@ determination(
     switch (tle_status) {
         case GET_TLE_FAILURE: return DET_NO_TLE;
         case GET_TLE_SUCCESS_OLD: break;
-        case GET_TLE_SUCCESS_NEW: break;
+        case GET_TLE_SUCCESS_NEW: update_IGRF = 1; break;
+        // update IGRF when we get a new TLE, including the 1st time
     }
 
 
@@ -116,7 +119,7 @@ determination(
         geocentric_latitude,
         longitude,
         geocentric_radius,
-        1, //recalculate coefficients every time for now...
+        update_IGRF, //recalculate coefficients on new TLE
 		&reference_mag
     );
 
