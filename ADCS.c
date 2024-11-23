@@ -17,15 +17,17 @@ ADCS_MAIN(adcs_mode mode) {
     switch(mode) {
         case ADCS_DETUMBLE:
             detumble_status detumble_status = detumble();
-
             switch(detumble_status) {
                 case DETUMBLE_ERROR:
                     return ADCS_MAIN_DETUMBLE_ERROR;
                     break;
             }
             break;
-
         case ADCS_HDD_EXP_ANGVEL:
+            break;
+        case ADCS_HDD_EXP_TRIAD:
+            break;
+        case ADCS_HDD_EXP_RAMP:
             break;
     }
 }
