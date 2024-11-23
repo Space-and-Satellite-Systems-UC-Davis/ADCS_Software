@@ -99,28 +99,32 @@ determination(
 
     vec3 reference_mag;
 
-    int igrf_time_status =
-    igrf_set_date_time(
-        year,
-        month,
-        day,
-        hour,
-        minute,
-        second
-    ); //recalculate every time for now...
+    // Only update IGRF date before recalculating coeffs
+    if (update_IGRF) {
+        int igrf_time_status =
+        igrf_set_date_time(
+            year,
+            month,
+            day,
+            hour,
+            minute,
+            second
+        );
 
-    switch (igrf_time_status) {
-        case IGRF_SET_DATE_OUT_OF_BOUNDS:
-            return DET_IGRF_TIME_ERROR;
-        case IGRF_SET_DATE_SUCCESS:
-            break;
-    }
+        switch (igrf_time_status) {
+            //TODO: use 'default' approximate time if out of bounds?
+            case IGRF_SET_DATE_OUT_OF_BOUNDS:
+                return DET_IGRF_TIME_ERROR;
+            case IGRF_SET_DATE_SUCCESS:
+                break;
+        }
+    } 
 
     igrf_update(
         geocentric_latitude,
         longitude,
         geocentric_radius,
-        update_IGRF, //recalculate coefficients on new TLE
+        update_IGRF, //recalculate coefficients only on new TLE
 		&reference_mag
     );
 
