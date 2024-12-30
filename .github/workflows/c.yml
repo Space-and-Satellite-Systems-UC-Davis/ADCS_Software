@@ -23,4 +23,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
           name: compiled_file
-          path: compiled_file_artifact.out
+          path: libADCS.so
