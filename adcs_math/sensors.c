@@ -8,3 +8,11 @@ float get_sensor_calibration(float currValue, float prevValue, float offset, flo
 {
     return (lowpass_filter(currValue, prevValue, 0.5) * gain) + offset;
 }
+
+int get_delta_t(int currTime, int prevTime) {
+    if (prevTime <= currTime) {
+        return currTime - prevTime;
+    } else {
+        return (INT_MAX - prevTime) + currTime;
+    }
+}

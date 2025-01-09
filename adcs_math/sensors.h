@@ -8,6 +8,7 @@
 #ifndef SENSORS_H
 #define SENSORS_H
 
+#include <limits.h>
 /**
  * @brief Implement lowpass filter on sensor raw values to mitigate the effect of noise from abnormally high values
  * 
@@ -30,6 +31,16 @@ float lowpass_filter(float currValue, float prevValue, float filterConstant);
  * @return sensor calibration value after filtration 
 */
 float get_sensor_calibration(float currValue, float prevValue, float offset, float gain);
+
+/**
+ * @brief safely calculate delta_t accounting for integer overflow
+ * 
+ * @param currTime current timestamp in milliseconds
+ * @param prevTime previous timestamp in milliseconds
+ * 
+ * @return delta_t change in time
+*/
+int get_delta_t(int currTime, int prevTime);
 
 #endif
 
