@@ -9,6 +9,7 @@
 #define SENSORS_H
 
 #include <limits.h>
+#include "virtual_intellisat.h"
 /**
  * @brief Implement lowpass filter on sensor raw values to mitigate the effect of noise from abnormally high values
  * 

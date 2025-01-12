@@ -9,6 +9,7 @@
 #include "adcs_math/vector.h"
 #include "virtual_intellisat.h"
 #include "control/bdot/bdot_control.h"
+#include "adcs_math/sensors.h"
 
 detumble_status detumble()
 {
@@ -58,7 +59,7 @@ detumble_status detumble()
 
 		vi_get_mag(&(mag.x), &(mag.y), &(mag.z));
 
-		delta_t=curr_millis-prev_millis;
+		delta_t = get_delta_t(curr_millis, prev_millis);
 
 		bdot_control(mag, mag_prev, delta_t, &coils_curr);
 	}
